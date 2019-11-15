@@ -1,0 +1,29 @@
+version: "3.7"
+services:
+    las-wrapper:
+        build: .
+        volumes:
+          - ./src:/app
+        depends_on:
+          - las
+        ports:
+          - 5000:5000
+        networks:
+          seco:
+            ipv4_address: "172.30.20.92"
+        env_file:
+          - docker.env
+    las:
+        image: jiemakel/las-ws:1.1
+        ports:
+          - "9000:9000"
+        networks:
+          seco:
+            ipv4_address: "172.30.20.91"
+networks:
+    seco:
+      driver: "bridge"
+      ipam:
+        driver: "default"
+        config:
+          - subnet: "172.30.20.0/22"
