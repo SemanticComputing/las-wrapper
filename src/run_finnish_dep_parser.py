@@ -206,7 +206,7 @@ class RunFinDepParser:
         for w in input['analysis']:
             weight = 0
             proper = ""
-            id += 1
+
 
             #print("w", w)
             analysis = w['analysis']
@@ -222,6 +222,7 @@ class RunFinDepParser:
                     open_brackets_counter += 1
 
             if (orig_form != " "):
+                id += 1
                 word = self.las_word_analysis(analysis, id, orig_form, proper, weight, word)
 
                 #print("word",word)
