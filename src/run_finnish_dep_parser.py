@@ -294,7 +294,7 @@ class RunFinDepParser:
             gt = r['globalTags']
             if 'DEPREL' in gt:
                 deprel = gt['DEPREL']
-                if proper == "FIRST" or proper == "LAST":
+                if proper == "FIRST":
                     deprel = "name"
                 elif proper == "GEO":
                     deprel = "place"
