@@ -65,7 +65,7 @@ class MorphologicalFeatures:
     def parse(self, feats):
         if feats == None:
             return
-        print('features',feats)
+        #print('features',feats)
         #print('features', feats.keys())
         if "Case" in feats:
             self.case = feats['Case']

@@ -57,7 +57,7 @@ class RunFinDepParser:
 
         items = list(self.input_texts.items())
         print('url', self.tool)
-        print('items before', items)
+        #print('items before', items)
         if len(items) > 1:
             pool = multiprocessing.Pool(4)
             chunksize = self.chunks
@@ -93,7 +93,7 @@ class RunFinDepParser:
 
                 output = self.summon_dep_parser(input_text)  # +str(output_file)
                 outputtexts[ind] = output
-                print(ind, output)
+                #print(ind, output)
                 #self.write_output(output, output_file)
                 #else:
                 #    logging.info("File %s exists, moving on", output_file);
@@ -121,7 +121,7 @@ class RunFinDepParser:
             r = requests.get(self.tool, params=payload)
             #print("No query made, just mocking", payload, self.tool)
 
-            print("TEST:",r.text)
+            #print("TEST:",r.text)
             output = json.loads(r.text) #str(r.text)
             #output = ""
         else:
@@ -164,7 +164,7 @@ class RunFinDepParser:
         self.input_texts = input
 
     def parse(self):
-        print("Start to parse")
+        #print("Start to parse")
         words = list()
 
         for ind in self.output_texts.keys():
@@ -172,7 +172,7 @@ class RunFinDepParser:
             #if not(data.startswith('<?xml version="1.0" encoding="utf-8"?>')):
                 # conllu parse
             sentences = self.parse_las(data)
-            print(ind, "input",sentences)
+            #print(ind, "input",sentences)
             words_json = list()
             # Parse sentences to words
             for i, words in sentences.items():
@@ -208,7 +208,7 @@ class RunFinDepParser:
             proper = ""
             id += 1
 
-            print("w", w)
+            #print("w", w)
             analysis = w['analysis']
             orig_form = w['word']
 
@@ -224,13 +224,13 @@ class RunFinDepParser:
             if (orig_form != " "):
                 word = self.las_word_analysis(analysis, id, orig_form, proper, weight, word)
 
-                print("word",word)
-                print("original form", orig_form)
-                print("brackets",open_brackets_counter)
+                #print("word",word)
+                #print("original form", orig_form)
+                #print("brackets",open_brackets_counter)
 
                 # end of sentence
                 if open_brackets_counter < 1 and orig_form in punct:
-                    print("Sentence:", sentence_id,sentences[sentence_id])
+                    #print("Sentence:", sentence_id,sentences[sentence_id])
                     sentence_id += 1
                     sentences[sentence_id] = list()
                 else:

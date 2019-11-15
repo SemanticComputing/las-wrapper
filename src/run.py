@@ -79,7 +79,7 @@ def index():
         results = depParser.get_json()
 
         if code == 1:
-            print('results',results)
+            #print('results',results)
             data = {'status': 200, 'data': results, 'service':"Finnish-dep-parser wrapper", 'date':dt.today().strftime('%Y-%m-%d')}
             return jsonify(data)
             #return "Success"
