@@ -249,7 +249,7 @@ class RunFinDepParser:
             prev_weight = weight
             prev_proper = proper
             weight = r['weight']
-            if weight != prev_weight:
+            if weight != prev_weight and word != None:
                 return word
             # parse word token's morphological features
             for part in wp:
@@ -302,7 +302,7 @@ class RunFinDepParser:
             if word == None:
                 word = Word(orig_form, upos, "", feats, "Edge", id,
                             lemma, 0, deprel, "", 0)
-            elif proper != "GEO" and weight == prev_weight and word != None and upos == prev_upos:
+            elif proper != "GEO" and weight == prev_weight and word != None and upos != prev_upos:
                 # if we have a better interpretation of a word
                 word = Word(orig_form, upos, "", feats, "Edge", id,
                             lemma, 0, deprel, "", 0)
