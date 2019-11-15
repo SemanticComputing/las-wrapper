@@ -121,7 +121,7 @@ class RunFinDepParser:
             r = requests.get(self.tool, params=payload)
             #print("No query made, just mocking", payload, self.tool)
 
-
+            print("TEST:",r.text)
             output = json.loads(r.text) #str(r.text)
             #output = ""
         else:
