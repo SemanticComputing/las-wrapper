@@ -258,7 +258,7 @@ class RunFinDepParser:
                 upos = ""
                 if 'tags' in part:
                     p = part['tags']
-                    prev_upos = upos
+
                     upos = self.check_feature('UPOS', p)
                     feats['Tense'] = self.check_feature('TENSE', p)
                     feats['Voice'] = self.check_feature('VOICE', p)
@@ -303,6 +303,7 @@ class RunFinDepParser:
             if word == None:
                 word = Word(orig_form, upos, "", feats, "Edge", id,
                             lemma, 0, deprel, "", 0)
+                prev_upos = upos
             elif proper != "GEO" and weight == prev_weight and word != None and upos == prev_upos:
                 # if we have a better interpretation of a word
                 word = Word(orig_form, upos, "", feats, "Edge", id,
