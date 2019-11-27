@@ -233,6 +233,7 @@ class RunFinDepParser:
                 if open_brackets_counter < 1 and orig_form in punct:
                     #print("Sentence:", sentence_id,sentences[sentence_id])
                     sentence_id += 1
+                    id = 0
                     sentences[sentence_id] = list()
                 else:
                     sentences[sentence_id].append(word)
