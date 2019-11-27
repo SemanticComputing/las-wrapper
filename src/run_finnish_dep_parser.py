@@ -311,6 +311,7 @@ class RunFinDepParser:
                     orig_form = orig_form + "."
                     lemma = lemma + "."
                     punct_skip = True
+                    upos = "PROPN"
                 word = Word(orig_form, upos, "", feats, "Edge", id,
                             lemma, 0, deprel, "", 0)
                 prev_upos = upos
