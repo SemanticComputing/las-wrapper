@@ -192,6 +192,7 @@ class RunFinDepParser:
         return 1
 
     def parse_las(self, input):
+        skip_punct = False
         id = 0
         sentence_id = 1
         word = None
@@ -221,9 +222,10 @@ class RunFinDepParser:
                 elif open_brackets_counter<1 and orig_form in brackets_open:
                     open_brackets_counter += 1
 
-            if (orig_form != " "):
+            print(orig_form, skip_punct, (orig_form in punct))
+            if (orig_form != " ") and not(skip_punct == True and orig_form in punct):
                 id += 1
-                word = self.las_word_analysis(analysis, id, orig_form, proper, weight, word)
+                word, skip_punct = self.las_word_analysis(analysis, id, orig_form, proper, weight, word)
 
                 #print("word",word)
                 #print("original form", orig_form)
@@ -240,19 +242,22 @@ class RunFinDepParser:
 
                 # once word interpretation has been decided, word is again null
                 word = None
+            else:
+                skip_punct = False
         return sentences
 
     def las_word_analysis(self, analysis, id, orig_form, proper, weight, word):
         for r in analysis:
             deprel = ""
             feats = dict()
+            punct_skip = False
 
             wp = r['wordParts']
             prev_weight = weight
             prev_proper = proper
             weight = r['weight']
             if weight != prev_weight and word != None:
-                return word
+                return word, punct_skip
             # parse word token's morphological features
             for part in wp:
                 lemma = part['lemma']
@@ -302,6 +307,10 @@ class RunFinDepParser:
                     deprel = "place"
 
             if word == None:
+                if self.check_abbrv(orig_form):
+                    orig_form = orig_form + "."
+                    lemma = lemma + "."
+                    punct_skip = True
                 word = Word(orig_form, upos, "", feats, "Edge", id,
                             lemma, 0, deprel, "", 0)
                 prev_upos = upos
@@ -309,8 +318,14 @@ class RunFinDepParser:
                 # if we have a better interpretation of a word
                 word = Word(orig_form, upos, "", feats, "Edge", id,
                             lemma, 0, deprel, "", 0)
-                return word
-        return word
+                return word, punct_skip
+        return word, punct_skip
+
+    def check_abbrv(self, abbr):
+        abbrv = ['ao', 'eaa', 'eKr', 'em', 'eo', 'esim', 'huom', 'jaa', 'jKr', 'jms', 'jne', 'ks', 'l', 'ma', 'ml', 'mm', 'mrd', 'n', 'nk', 'no', 'ns', 'o.s', 'oto', 'puh', 'so', 'tjsp', 'tjms', 'tm', 'tms', 'tmv', 'ts', 'v', 'va', 'vrt', 'vs', 'vt', 'ym', 'yms', 'yo', 'V', 'RN:o', 'p', 'fp', 'ipu', 'kp', 'kok', 'lib', 'liik', 'ps', 'peruss', 'sin', 'pp', 'tl', 'ske', 'kesk', 'kd', 'r', 'sd', 'vas', 'vihr', 'ktp', 'komm', 'ref']
+        if abbr in abbrv:
+            return True
+        return False
 
     def check_feature(self, label, p):
         tag = ""
