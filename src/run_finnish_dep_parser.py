@@ -31,7 +31,7 @@ class RunFinDepParser:
 
         self.file_extension = ""
         self.output_files = list()
-        self.output_texts =dict()
+        self.output_texts = dict()
         self.sentences_json = dict()
         self.sentences_data = dict()
         self.tool = ""
@@ -223,7 +223,7 @@ class RunFinDepParser:
                     open_brackets_counter += 1
 
             print(orig_form, skip_punct, (orig_form in punct))
-            if (orig_form != " ") and not(skip_punct == True and orig_form in punct):
+            if (orig_form != " " or orig_form != "\n\n") and not(skip_punct == True and orig_form in punct):
                 id += 1
                 word, skip_punct = self.las_word_analysis(analysis, id, orig_form, proper, weight, word)
 
@@ -242,6 +242,8 @@ class RunFinDepParser:
 
                 # once word interpretation has been decided, word is again null
                 word = None
+            elif orig_form == "\n\n":
+                return sentences
             else:
                 skip_punct = False
         return sentences
@@ -311,7 +313,7 @@ class RunFinDepParser:
                     orig_form = orig_form + "."
                     lemma = lemma + "."
                     punct_skip = True
-                    upos = "PROPN"
+                    upos = "NOUN"
                 word = Word(orig_form, upos, "", feats, "Edge", id,
                             lemma, 0, deprel, "", 0)
                 prev_upos = upos
