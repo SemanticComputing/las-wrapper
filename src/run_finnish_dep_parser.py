@@ -80,20 +80,20 @@ class RunFinDepParser:
         outputtexts = dict()
 
         for tpl in data:
-            ind =tpl[0]
+            ind = tpl[0]
             input_text = tpl[1]
 
             if len(input_text.split())> 1:
                 output_file = str(self.folder)+"output/"+str(ind)+".txt"
-                #print("IN=",input_text)
-                #print("OUT=", output_file)
+                print("IN=",input_text)
+                print("OUT=", output_file)
                 #tmp_output_files.append(output_file)
                 my_file = Path(output_file)
                 #if not(my_file.exists()):
 
                 output = self.summon_dep_parser(input_text)  # +str(output_file)
                 outputtexts[ind] = output
-                #print(ind, output)
+                print(ind, output)
                 #self.write_output(output, output_file)
                 #else:
                 #    logging.info("File %s exists, moving on", output_file);
@@ -105,10 +105,13 @@ class RunFinDepParser:
         for ind in self.input_texts.keys():
             input_text = self.input_texts[ind]
             if len(input_text.split())> 1:
-                output_file = str(self.folder)+"output/"+str(ind)+".txt"
-                self.output_files.append(output_file)
+                print("IN=", input_text)
+
+                #output_file = str(self.folder)+"output/"+str(ind)+".txt"
+                #self.output_files.append(output_file)
                 output = self.summon_dep_parser(input_text)
                 self.output_texts[ind] = output
+                print("OUT=", output)
                 #print(ind, output)
                 #self.write_output(output, output_file)
 
@@ -163,30 +166,36 @@ class RunFinDepParser:
     def set_input_files(self, input):
         self.input_texts = input
 
-    def parse(self):
+    def parse(self, parallel=True):
         #print("Start to parse")
         words = list()
 
-        for ind in self.output_texts.keys():
-            data = self.output_texts[ind]
+        for paragraph_ord in self.output_texts.keys():
+            #self.sentences_json[paragraph_ord] = dict()
+            #self.sentences_data[paragraph_ord] = dict()
+            data = self.output_texts[paragraph_ord]
             #if not(data.startswith('<?xml version="1.0" encoding="utf-8"?>')):
                 # conllu parse
-            sentences = self.parse_las(data)
-            #print(ind, "input",sentences)
+            #sentences = self.parse_las(data)
+            #print(paragraph_ord, "input", sentences)
             words_json = list()
-            # Parse sentences to words
-            for i, words in sentences.items():
-                if len(words) > 0:
-                    # Parse words to word-objects
-                    for j in range(0, len(words)):
-                        word = words[j]
-                        words_json.insert(j, word.json())
+            for sentences in self.parse_las(data):
+                paragraph_ord += 1
+                self.sentences_json[paragraph_ord] = dict()
+                self.sentences_data[paragraph_ord] = dict()
+                # Parse sentences to words
+                for sentence_ord, words in sentences.items():
+                    if len(words) > 0:
+                        # Parse words to word-objects
+                        for j in range(0, len(words)):
+                            word = words[j]
+                            words_json.insert(j, word.json())
 
-                    # save words to a sentence, render to json
-                    self.sentences_data[i] = words
-                    self.sentences_json[i] = words_json
-                    words_json = list()
-                    print("Sentence", i, self.sentences_data[i])
+                        # save words to a sentence, render to json
+                        self.sentences_data[paragraph_ord][sentence_ord] = words
+                        self.sentences_json[paragraph_ord][sentence_ord] = words_json
+                        words_json = list()
+                        print(paragraph_ord, ": sentence", sentence_ord, self.sentences_data[paragraph_ord][sentence_ord])
             #else:
             #    return 0
         return 1
@@ -222,8 +231,11 @@ class RunFinDepParser:
                 elif open_brackets_counter<1 and orig_form in brackets_open:
                     open_brackets_counter += 1
 
-            print(orig_form, skip_punct, (orig_form in punct))
-            if (orig_form != " " or orig_form != "\n\n") and not(skip_punct == True and orig_form in punct):
+            print(len(orig_form), orig_form, skip_punct, (orig_form in punct))
+            if "\n" in orig_form:
+                print("There's a newline in variable...")
+
+            if (orig_form != " " and not("\n" in orig_form)) and not(skip_punct == True and orig_form in punct):
                 id += 1
                 word, skip_punct = self.las_word_analysis(analysis, id, orig_form, proper, weight, word)
 
@@ -242,11 +254,15 @@ class RunFinDepParser:
 
                 # once word interpretation has been decided, word is again null
                 word = None
-            elif orig_form == "\n\n":
-                return sentences
+            elif "\n" in orig_form and len(sentences) > 0:
+                # change of paragraph has been identified, return sentences of the previous paragraph
+                yield sentences
+                sentence_id = 1
+                sentences = dict()
+                sentences[sentence_id] = list()
             else:
                 skip_punct = False
-        return sentences
+        yield sentences
 
     def las_word_analysis(self, analysis, id, orig_form, proper, weight, word):
         for r in analysis:

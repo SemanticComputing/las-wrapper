@@ -27,12 +27,21 @@ def before_request():
 
 def parse_input(request):
     print('----------------------PARSE DATA----------------------')
-    input = None
+    input = dict()
     env = None
     if request.method == 'GET':
-        text = request.args.get('text')
-        sentences = text.splitlines()#tokenization(text)
-        input = {i: sentences[i] for i in range(0, len(sentences))}
+        #p = 0
+        #input[p] = list()
+        input[0] = request.args.get('text')
+        # sentences = text.splitlines()#tokenization(text)
+        # print("Input:",sentences)
+        # input = dict()
+        # for i in range(0, len(sentences)):
+        #     if sentences[i] == '':
+        #         p += 1
+        #         input[p] = list()
+        #     input[p].append(sentences[i])
+        #input = {i: sentences[i] for i in range(0, len(sentences))}
 
         opt_param = request.args.get("test")
         print('OPT PARAM', opt_param)
@@ -41,8 +50,8 @@ def parse_input(request):
         print('VALUE', env)
     else:
         if request.headers['Content-Type'] == 'text/plain':
-            sentences = str(request.data.decode('utf-8')).splitlines() #tokenization(str(request.data.decode('utf-8')))
-            input = {i:sentences[i] for i in range(0, len(sentences))}
+            input[0] = str(request.data.decode('utf-8'))#.splitlines() #tokenization(str(request.data.decode('utf-8')))
+            # input = {i:sentences[i] for i in range(0, len(sentences))}
             print("data", input)
 
             opt_param = request.args.get("test")
@@ -75,7 +84,7 @@ def index():
     if input_data != None:
         depParser = RunFinDepParser(input_data, env)
         depParser.run()
-        code = depParser.parse()
+        code = depParser.parse(parallel=False)
         results = depParser.get_json()
 
         if code == 1:
