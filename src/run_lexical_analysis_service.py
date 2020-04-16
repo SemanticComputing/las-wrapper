@@ -52,6 +52,8 @@ class RunLexicalAnalysisService:
             self.tool = config['DEFAULT']['las_url']
             self.chunks = int(config['DEFAULT']['chunking'])
 
+        print("[READ CONF]", self.tool, self.chunks)
+
     def run(self):
         files = None
 

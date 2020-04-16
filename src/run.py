@@ -71,10 +71,10 @@ def setup_tokenizer():
 def index():
     input_data, env = parse_input(request)
     if input_data != None:
-        depParser = RunLexicalAnalysisService(input_data, env)
-        depParser.run()
-        code = depParser.parse(parallel=False)
-        results = depParser.get_json()
+        las = RunLexicalAnalysisService(input_data, env)
+        las.run()
+        code = las.parse(parallel=False)
+        results = las.get_json()
 
         if code == 1:
             data = {'status': 200, 'data': results, 'service':"LAS wrapper", 'date':dt.today().strftime('%Y-%m-%d')}
