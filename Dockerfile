@@ -1,7 +1,5 @@
 FROM alpine:3.8
 
-ENV FILE_ORIG_CONFIG_INI /app/config.ini
-ENV FILE_CONFIG_INI /app/conf/config.ini
 ENV GUNICORN_WORKER_AMOUNT 4
 ENV GUNICORN_TIMEOUT 300
 ENV GUNICORN_RELOAD ""
@@ -13,6 +11,9 @@ RUN pip3 install flask requests nltk gunicorn
 WORKDIR /app
 
 COPY src ./
+
+ENV CONF_FILE /app/conf/config.ini
+COPY conf/config.ini $CONF_FILE
 
 RUN chgrp -R 0 /app \
     && chmod -R g+rwX /app
