@@ -2,7 +2,7 @@ from flask import Flask, jsonify
 from flask import request
 import argparse
 import sys, os
-from run_finnish_dep_parser import RunFinDepParser
+from run_lexical_analysis_service import RunLexicalAnalysisService
 import logging, json
 import re
 import time
@@ -30,18 +30,8 @@ def parse_input(request):
     input = dict()
     env = None
     if request.method == 'GET':
-        #p = 0
-        #input[p] = list()
+
         input[0] = request.args.get('text')
-        # sentences = text.splitlines()#tokenization(text)
-        # print("Input:",sentences)
-        # input = dict()
-        # for i in range(0, len(sentences)):
-        #     if sentences[i] == '':
-        #         p += 1
-        #         input[p] = list()
-        #     input[p].append(sentences[i])
-        #input = {i: sentences[i] for i in range(0, len(sentences))}
 
         opt_param = request.args.get("test")
         print('OPT PARAM', opt_param)
@@ -50,8 +40,7 @@ def parse_input(request):
         print('VALUE', env)
     else:
         if request.headers['Content-Type'] == 'text/plain':
-            input[0] = str(request.data.decode('utf-8'))#.splitlines() #tokenization(str(request.data.decode('utf-8')))
-            # input = {i:sentences[i] for i in range(0, len(sentences))}
+            input[0] = str(request.data.decode('utf-8'))
             print("data", input)
 
             opt_param = request.args.get("test")
@@ -82,16 +71,14 @@ def setup_tokenizer():
 def index():
     input_data, env = parse_input(request)
     if input_data != None:
-        depParser = RunFinDepParser(input_data, env)
+        depParser = RunLexicalAnalysisService(input_data, env)
         depParser.run()
         code = depParser.parse(parallel=False)
         results = depParser.get_json()
 
         if code == 1:
-            #print('results',results)
             data = {'status': 200, 'data': results, 'service':"Finnish-dep-parser wrapper", 'date':dt.today().strftime('%Y-%m-%d')}
             return jsonify(data)
-            #return "Success"
         else:
             data = {'status': -1, 'error': results.toprettyxml(), 'service':"Finnish-dep-parser wrapper", 'date':dt.today().strftime('%Y-%m-%d')}
             return jsonify(json.dumps(data, ensure_ascii=False))

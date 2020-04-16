@@ -12,14 +12,14 @@ from itertools import zip_longest
 from multiprocessing import Process
 import multiprocessing
 
-logger = logging.getLogger('Finer')
-hdlr = logging.FileHandler('finer.log')
+logger = logging.getLogger('Las')
+hdlr = logging.FileHandler('las.log')
 formatter = logging.Formatter('%(asctime)s %(name)s %(levelname)s %(message)s')
 hdlr.setFormatter(formatter)
 logger.addHandler(hdlr)
 logger.setLevel(logging.INFO)
 
-class RunFinDepParser:
+class RunLexicalAnalysisService:
     def __init__(self, input_texts, env):
         self.input_texts = list()
         if len(input_texts)>0:
@@ -46,10 +46,10 @@ class RunFinDepParser:
         config.read('src/config.ini')
 
         if env == "TEST":
-            self.tool = config['TEST']['finnish_dep_parser_url']
+            self.tool = config['TEST']['las_url']
             self.chunks = int(config['TEST']['chunking'])
         else:
-            self.tool = config['DEFAULT']['finnish_dep_parser_url']
+            self.tool = config['DEFAULT']['las_url']
             self.chunks = int(config['DEFAULT']['chunking'])
 
     def run(self):
@@ -63,11 +63,11 @@ class RunFinDepParser:
             chunksize = self.chunks
             chunks = [items[i:i + chunksize] for i in range(0, len(items), chunksize)]
 
-            files = pool.map(self.execute_depparser_parallel, chunks)
+            files = pool.map(self.execute_las_parallel, chunks)
             pool.close()
             pool.join()
         else:
-            files = self.execute_depparser(items)
+            files = self.execute_las(items)
 
         if files != None:
             for i, j in files[0].items():
@@ -75,7 +75,7 @@ class RunFinDepParser:
                     print('This already in', i, j)
                 self.output_texts[i] = j
 
-    def execute_depparser_parallel(self, data):
+    def execute_las_parallel(self, data):
 
         outputtexts = dict()
 
@@ -91,7 +91,7 @@ class RunFinDepParser:
                 my_file = Path(output_file)
                 #if not(my_file.exists()):
 
-                output = self.summon_dep_parser(input_text)  # +str(output_file)
+                output = self.summon_las(input_text)  # +str(output_file)
                 outputtexts[ind] = output
                 print(ind, output)
                 #self.write_output(output, output_file)
@@ -99,34 +99,25 @@ class RunFinDepParser:
                 #    logging.info("File %s exists, moving on", output_file);
         return outputtexts
 
-
-
-    def execute_depparser(self, input):
+    def execute_las(self, input):
         for ind in self.input_texts.keys():
             input_text = self.input_texts[ind]
-            if len(input_text.split())> 1:
-                print("IN=", input_text)
+            if input_text != None:
+                if len(input_text.split())> 1:
+                    print("IN=", input_text)
+                    output = self.summon_las(input_text)
+                    self.output_texts[ind] = output
+                    print("OUT=", output)
 
-                #output_file = str(self.folder)+"output/"+str(ind)+".txt"
-                #self.output_files.append(output_file)
-                output = self.summon_dep_parser(input_text)
-                self.output_texts[ind] = output
-                print("OUT=", output)
-                #print(ind, output)
-                #self.write_output(output, output_file)
-
-    def summon_dep_parser(self, input_text):
+    def summon_las(self, input_text):
         output = ""
         command = self.contruct_command(input_text)
         if self.tool.startswith('http'):
 
             payload = {'text': str(input_text)}
             r = requests.get(self.tool, params=payload)
-            #print("No query made, just mocking", payload, self.tool)
 
-            #print("TEST:",r.text)
             output = json.loads(r.text) #str(r.text)
-            #output = ""
         else:
             try:
                 logging.info(command)
@@ -167,17 +158,11 @@ class RunFinDepParser:
         self.input_texts = input
 
     def parse(self, parallel=True):
-        #print("Start to parse")
         words = list()
 
         for paragraph_ord in self.output_texts.keys():
-            #self.sentences_json[paragraph_ord] = dict()
-            #self.sentences_data[paragraph_ord] = dict()
             data = self.output_texts[paragraph_ord]
-            #if not(data.startswith('<?xml version="1.0" encoding="utf-8"?>')):
-                # conllu parse
-            #sentences = self.parse_las(data)
-            #print(paragraph_ord, "input", sentences)
+
             words_json = list()
             for sentences in self.parse_las(data):
                 paragraph_ord += 1
@@ -239,13 +224,8 @@ class RunFinDepParser:
                 id += 1
                 word, skip_punct = self.las_word_analysis(analysis, id, orig_form, proper, weight, word)
 
-                #print("word",word)
-                #print("original form", orig_form)
-                #print("brackets",open_brackets_counter)
-
                 # end of sentence
                 if open_brackets_counter < 1 and orig_form in punct:
-                    #print("Sentence:", sentence_id,sentences[sentence_id])
                     sentence_id += 1
                     id = 0
                     sentences[sentence_id] = list()
@@ -297,25 +277,6 @@ class RunFinDepParser:
                     feats['PronType'] = self.check_feature('PRONTYPE', p)  # PRONTYPE
                     proper = self.check_feature('PROPER', p)
 
-                    # if 'TENSE' in p:
-                    #    feats['tense'] = p['TENSE'][0]
-                    # if 'VOICE' in p:
-                    #    feats['voice'] = p['VOICE'][0]
-                    # if 'MOOD' in p:
-                    #    feats['mood'] = p['MOOD'][0]
-                    # if 'NUM' in p:
-                    #    if p['NUM'][0] == "SG":
-                    #        feats['num'] = "Sing"
-                    #    else:
-                    #        feats['num'] = "Plur"
-                    # if 'CASE' in p:
-                    #    feats['case'] = p['CASE'][0].capitalize()
-                    # if 'PERS' in p:
-                    #     feats['person'] = p['PERS'][0]
-                    # if 'PROPER' in p:
-                    #     proper = p['PROPER'][0]
-                # if upos == 'NOUN' or upos == 'PROPN':
-                #    res = res + lemma + " "
             gt = r['globalTags']
             if 'DEPREL' in gt:
                 deprel = gt['DEPREL']
