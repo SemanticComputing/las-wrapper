@@ -77,12 +77,12 @@ def index():
         results = depParser.get_json()
 
         if code == 1:
-            data = {'status': 200, 'data': results, 'service':"Finnish-dep-parser wrapper", 'date':dt.today().strftime('%Y-%m-%d')}
+            data = {'status': 200, 'data': results, 'service':"LAS wrapper", 'date':dt.today().strftime('%Y-%m-%d')}
             return jsonify(data)
         else:
-            data = {'status': -1, 'error': results.toprettyxml(), 'service':"Finnish-dep-parser wrapper", 'date':dt.today().strftime('%Y-%m-%d')}
+            data = {'status': -1, 'error': results.toprettyxml(), 'service':"LAS wrapper", 'date':dt.today().strftime('%Y-%m-%d')}
             return jsonify(json.dumps(data, ensure_ascii=False))
     
-    data = {'status': -1, 'error': "415 Unsupported Media Type ;)", 'service':"Finnish-dep-parser wrapper", 'date':dt.today().strftime('%Y-%m-%d')}
+    data = {'status': -1, 'error': "415 Unsupported Media Type ;)", 'service':"LAS wrapper", 'date':dt.today().strftime('%Y-%m-%d')}
     return jsonify(data)
 
