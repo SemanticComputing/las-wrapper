@@ -33,7 +33,7 @@ curl -d 'Helsingin kirjamessut perui Kiuas-kirjakustantamon osallistumisen messu
 
 ### Configurations
 
-The configurations for LAS can be found in the ```src/config.ini```.
+The configurations for LAS can be found in the ```conf/config.ini```.
 
 ### Output
 
