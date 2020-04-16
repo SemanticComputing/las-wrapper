@@ -7,10 +7,13 @@ import os.path
 from pathlib import Path
 import configparser
 #from conllu import parse
+from configparser import Error, ParsingError, MissingSectionHeaderError, NoOptionError, DuplicateOptionError, DuplicateSectionError, NoSectionError
 from word import Word
 from itertools import zip_longest
 from multiprocessing import Process
 import multiprocessing
+import traceback, sys
+from flask import abort
 
 logger = logging.getLogger('Las')
 hdlr = logging.FileHandler('las.log')
@@ -41,16 +44,32 @@ class RunLexicalAnalysisService:
         self.read_configs(env)
 
     def read_configs(self, env):
+        try:
+            config = configparser.ConfigParser()
+            config.read('conf/config.ini')
 
-        config = configparser.ConfigParser()
-        config.read('conf/config.ini')
+            if env in config:
+                self.tool = config[env]['las_url']
+                self.chunks = int(config[env]['chunking'])
+            elif env == None or len(env) == 0:
+                err_msg = 'The environment is not set: %s' % (env)
+                raise Exception(err_msg)
+            else:
+                if 'DEFAULT' in config:
+                    self.tool = config['DEFAULT']['las_url']
+                    self.chunks = int(config['DEFAULT']['chunking'])
+                else:
+                    err_msg = 'Cannot find section headers: %s, %s' % (env, 'DEFAULT')
+                    raise MissingSectionHeaderError(err_msg)
 
-        if env == "TEST":
-            self.tool = config['TEST']['las_url']
-            self.chunks = int(config['TEST']['chunking'])
-        else:
-            self.tool = config['DEFAULT']['las_url']
-            self.chunks = int(config['DEFAULT']['chunking'])
+        except Error as e:
+            print("[ERROR] ConfigParser error:", sys.exc_info()[0])
+            traceback.print_exc()
+            abort(500)
+        except Exception as err:
+            print("[ERROR] Unexpected error:", sys.exc_info()[0])
+            traceback.print_exc()
+            abort(500)
 
     def run(self):
         files = None
@@ -87,16 +106,11 @@ class RunLexicalAnalysisService:
                 output_file = str(self.folder)+"output/"+str(ind)+".txt"
                 print("IN=",input_text)
                 print("OUT=", output_file)
-                #tmp_output_files.append(output_file)
                 my_file = Path(output_file)
-                #if not(my_file.exists()):
 
                 output = self.summon_las(input_text)  # +str(output_file)
                 outputtexts[ind] = output
                 print(ind, output)
-                #self.write_output(output, output_file)
-                #else:
-                #    logging.info("File %s exists, moving on", output_file);
         return outputtexts
 
     def execute_las(self, input):

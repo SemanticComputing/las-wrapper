@@ -1,5 +1,5 @@
 from flask import Flask, jsonify
-from flask import request
+from flask import request, abort
 import argparse
 import sys, os
 from run_lexical_analysis_service import RunLexicalAnalysisService
@@ -11,7 +11,7 @@ import nltk
 import nltk.data
 import xml.dom.minidom
 from datetime import datetime as dt
-import csv
+import csv, traceback
 
 app = Flask(__name__)
 
@@ -33,19 +33,27 @@ def parse_input(request):
 
         input[0] = request.args.get('text')
 
-        opt_param = request.args.get("test")
-        if opt_param != None:
-            env = "TEST"
     else:
         if request.headers['Content-Type'] == 'text/plain':
             input[0] = str(request.data.decode('utf-8'))
 
-            opt_param = request.args.get("test")
-            if opt_param != None:
-                env = "TEST"
         else:
             print("Bad type", request.headers['Content-Type'])
     print('---------------------------------------------------')
+
+    try:
+        env = os.environ['LAS_CONFIG_ENV']
+    except KeyError as kerr:
+        print("Environment variable LAS_CONFIG_ENV not set:", sys.exc_info()[0])
+        traceback.print_exc()
+        env = None
+        abort(500, 'Problem with setup: internal server error')
+    except Exception as err:
+        print("Unexpected error:", sys.exc_info()[0])
+        traceback.print_exc()
+        env = None
+        abort(500, 'Unexpected Internal Server Error')
+
     return input, env
 
 def tokenization(text):
