@@ -43,7 +43,7 @@ class RunLexicalAnalysisService:
     def read_configs(self, env):
 
         config = configparser.ConfigParser()
-        config.read('src/config.ini')
+        config.read('conf/config.ini')
 
         if env == "TEST":
             self.tool = config['TEST']['las_url']
