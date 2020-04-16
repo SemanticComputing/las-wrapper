@@ -34,27 +34,21 @@ def parse_input(request):
         input[0] = request.args.get('text')
 
         opt_param = request.args.get("test")
-        print('OPT PARAM', opt_param)
         if opt_param != None:
             env = "TEST"
-        print('VALUE', env)
     else:
         if request.headers['Content-Type'] == 'text/plain':
             input[0] = str(request.data.decode('utf-8'))
-            print("data", input)
 
             opt_param = request.args.get("test")
-            print('OPT PARAM', opt_param)
             if opt_param != None:
                 env = "TEST"
-            print('VALUE', env)
         else:
             print("Bad type", request.headers['Content-Type'])
     print('---------------------------------------------------')
     return input, env
 
 def tokenization(text):
-    print('Tokenize this', text)
     tokenizer = setup_tokenizer()
     return tokenizer.tokenize(text)
 
@@ -63,7 +57,6 @@ def setup_tokenizer():
     with open('language-resources/abbreviations.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=';')
         for row in csv_reader:
-            print("Add abbreviation", row[0])
             tokenizer._params.abbrev_types.add(row[0])
     return tokenizer
 
