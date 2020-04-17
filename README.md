@@ -54,7 +54,7 @@ For each sentence, the api returns set of identified named entities. The sentenc
 
 `docker-compose up`: builds and runs LAS-Wrapper and LAS webservice (see [repository](https://github.com/jiemakel/las-ws))
 
-The following configuration parameters can be passed as environment variables to the LAS-Wrapper container:
+The following configuration parameters must be passed as environment variables to the LAS-Wrapper container:
 
 * IP_BACKEND_LAS
 * PORT_BACKEND_LAS
