@@ -37,7 +37,7 @@ The configurations for LAS can be found in the ```conf/config.ini```.
 * las_url (test: http://nlp.ldf.fi/fin-dep-parser-ws): service url for Lexical Analysis Service
 * chunking: number of chunks to which texts are divided for parallel analysis, i.e., how many texts can be processed in parallel.
 
-In order to use these configurations, set the environment variable LAS_CONFIG_ENV to 'DEFAULT' or to you personal setting. The value is the section name in the config.ini file where the personal settings can be set for the attributes (configurations) defined above. 
+In order to use these configurations, set the environment variable LAS_CONFIG_ENV to 'DEFAULT' or to you personal setting. The value is the section name in the config.ini file where the personal settings can be set for the attributes (configurations) defined above.
 
 
 ### Output
@@ -52,9 +52,15 @@ For each sentence, the api returns set of identified named entities. The sentenc
 
 ## Running in Docker
 
-`docker-compose up`: builds and runs Finnish-Dep-Parser-Wrapper and Finnish-dep-parser webservice (see [repository](https://github.com/SemanticComputing/finnish-dep-parser-docker))
+`docker-compose up`: builds and runs LAS-Wrapper and LAS webservice (see [repository](https://github.com/jiemakel/las-ws))
+
+The following configuration parameters must be passed as environment variables to the LAS-Wrapper container:
+
+* IP_BACKEND_LAS
+* PORT_BACKEND_LAS
+
+Other configuration parameters should be set by using a config.ini (see section Configurations above) which can be e.g. bind mounted to container's path `/app/conf/config.ini`.
 
 ## Deployment in Rahti
 
 Updates are automatically deployed into `http://nlp.ldf.fi` when commits are pushed to this repo.
-

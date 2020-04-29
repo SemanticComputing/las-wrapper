@@ -12,6 +12,7 @@ WORKDIR /app
 
 COPY src ./
 
+ENV LAS_CONFIG_ENV DEFAULT
 ENV CONF_FILE /app/conf/config.ini
 COPY conf/config.ini $CONF_FILE
 
