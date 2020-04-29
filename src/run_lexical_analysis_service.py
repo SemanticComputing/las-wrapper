@@ -75,7 +75,7 @@ class RunLexicalAnalysisService:
         files = None
 
         items = list(self.input_texts.items())
-        print('url', self.tool)
+        #print('url', self.tool)
         #print('items before', items)
         if len(items) > 1:
             pool = multiprocessing.Pool(4)
@@ -104,13 +104,13 @@ class RunLexicalAnalysisService:
 
             if len(input_text.split())> 1:
                 output_file = str(self.folder)+"output/"+str(ind)+".txt"
-                print("IN=",input_text)
-                print("OUT=", output_file)
+                #print("IN=",input_text)
+                #print("OUT=", output_file)
                 my_file = Path(output_file)
 
                 output = self.summon_las(input_text)  # +str(output_file)
                 outputtexts[ind] = output
-                print(ind, output)
+                #print(ind, output)
         return outputtexts
 
     def execute_las(self, input):
@@ -118,10 +118,10 @@ class RunLexicalAnalysisService:
             input_text = self.input_texts[ind]
             if input_text != None:
                 if len(input_text.split())> 1:
-                    print("IN=", input_text)
+                    #print("IN=", input_text)
                     output = self.summon_las(input_text)
                     self.output_texts[ind] = output
-                    print("OUT=", output)
+                    #print("OUT=", output)
 
     def summon_las(self, input_text):
         output = ""
@@ -194,7 +194,7 @@ class RunLexicalAnalysisService:
                         self.sentences_data[paragraph_ord][sentence_ord] = words
                         self.sentences_json[paragraph_ord][sentence_ord] = words_json
                         words_json = list()
-                        print(paragraph_ord, ": sentence", sentence_ord, self.sentences_data[paragraph_ord][sentence_ord])
+                        #print(paragraph_ord, ": sentence", sentence_ord, self.sentences_data[paragraph_ord][sentence_ord])
             #else:
             #    return 0
         return 1
@@ -230,7 +230,7 @@ class RunLexicalAnalysisService:
                 elif open_brackets_counter<1 and orig_form in brackets_open:
                     open_brackets_counter += 1
 
-            print(len(orig_form), orig_form, skip_punct, (orig_form in punct))
+            #print(len(orig_form), orig_form, skip_punct, (orig_form in punct))
             if "\n" in orig_form:
                 print("There's a newline in variable...")
 
@@ -263,6 +263,7 @@ class RunLexicalAnalysisService:
             deprel = ""
             feats = dict()
             punct_skip = False
+            lemma=""
 
             wp = r['wordParts']
             prev_weight = weight
@@ -272,7 +273,7 @@ class RunLexicalAnalysisService:
                 return word, punct_skip
             # parse word token's morphological features
             for part in wp:
-                lemma = part['lemma']
+                lemma += part['lemma']
                 upos = ""
                 if 'tags' in part:
                     p = part['tags']
