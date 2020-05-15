@@ -1,12 +1,10 @@
 from morphologicalfeatures import MorphologicalFeatures
 import logging
+import logging, logging.config
 
-logger = logging.getLogger('DocumentStructure')
-hdlr = logging.FileHandler('documentstructure.log')
-formatter = logging.Formatter('%(asctime)s %(name)s %(levelname)s %(message)s')
-hdlr.setFormatter(formatter)
-logger.addHandler(hdlr)
-logger.setLevel(logging.INFO)
+logging.config.fileConfig(fname='conf/logging.ini', disable_existing_loggers=False)
+logger = logging.getLogger('las')
+
 class Word:
     def __init__(self, word, upos, uposx, feat, edge, id, lemma, head, deprel, deps, misc):
         self.lemma = lemma

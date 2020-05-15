@@ -1,0 +1,139 @@
+'2020-05-15 16:54:00,190 werkzeug INFO  * Running on http://127.0.0.1:8040/ (Press CTRL+C to quit)
+'2020-05-15 16:54:06,720 run INFO HEADERS: Accept-Encoding: gzip, deflate, br
+Sec-Fetch-User: ?1
+Cache-Control: max-age=0
+Host: 127.0.0.1:8040
+Accept-Language: en-GB,en-US;q=0.9,en;q=0.8
+Sec-Fetch-Dest: document
+Connection: keep-alive
+Sec-Fetch-Mode: navigate
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.113 Safari/537.36
+Sec-Fetch-Site: none
+
+
+'2020-05-15 16:54:06,721 run INFO REQ_path: /
+'2020-05-15 16:54:06,721 run INFO ARGS: ImmutableMultiDict([('text', 'Mustan kissan paksut posket')])
+'2020-05-15 16:54:06,721 run INFO DATA: b''
+'2020-05-15 16:54:06,722 run INFO FORM: ImmutableMultiDict([])
+'2020-05-15 16:54:06,807 werkzeug INFO 127.0.0.1 - - [15/May/2020 16:54:06] "GET /?text=Mustan%20kissan%20paksut%20posket HTTP/1.1" 200 -
+'2020-05-15 16:55:14,843 werkzeug INFO  * Running on http://127.0.0.1:8040/ (Press CTRL+C to quit)
+'2020-05-15 16:55:17,534 run INFO HEADERS: Accept-Encoding: gzip, deflate, br
+Sec-Fetch-User: ?1
+Upgrade-Insecure-Requests: 1
+Sec-Fetch-Dest: document
+Sec-Fetch-Site: none
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Connection: keep-alive
+Sec-Fetch-Mode: navigate
+Host: 127.0.0.1:8040
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.113 Safari/537.36
+Cache-Control: max-age=0
+Accept-Language: en-GB,en-US;q=0.9,en;q=0.8
+
+
+'2020-05-15 16:55:17,535 run INFO REQ_path: /
+'2020-05-15 16:55:17,536 run INFO ARGS: ImmutableMultiDict([('text', 'Mustan kissan paksut posket')])
+'2020-05-15 16:55:17,536 run INFO DATA: b''
+'2020-05-15 16:55:17,536 run INFO FORM: ImmutableMultiDict([])
+'2020-05-15 16:55:17,599 werkzeug INFO 127.0.0.1 - - [15/May/2020 16:55:17] "GET /?text=Mustan%20kissan%20paksut%20posket HTTP/1.1" 200 -
+'2020-05-15 16:55:24,767 run INFO HEADERS: Accept-Encoding: gzip, deflate, br
+Sec-Fetch-User: ?1
+Upgrade-Insecure-Requests: 1
+Sec-Fetch-Dest: document
+Sec-Fetch-Site: none
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Connection: keep-alive
+Sec-Fetch-Mode: navigate
+Host: 127.0.0.1:8040
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.113 Safari/537.36
+Cache-Control: max-age=0
+Accept-Language: en-GB,en-US;q=0.9,en;q=0.8
+
+
+'2020-05-15 16:55:24,767 run INFO REQ_path: /
+'2020-05-15 16:55:24,767 run INFO ARGS: ImmutableMultiDict([('text', 'Mustan kissan paksut posket')])
+'2020-05-15 16:55:24,767 run INFO DATA: b''
+'2020-05-15 16:55:24,767 run INFO FORM: ImmutableMultiDict([])
+'2020-05-15 16:55:24,817 werkzeug INFO 127.0.0.1 - - [15/May/2020 16:55:24] "GET /?text=Mustan%20kissan%20paksut%20posket HTTP/1.1" 200 -
+'2020-05-15 16:55:28,470 run INFO HEADERS: Accept-Encoding: gzip, deflate, br
+Sec-Fetch-User: ?1
+Upgrade-Insecure-Requests: 1
+Sec-Fetch-Dest: document
+Sec-Fetch-Site: none
+Connection: keep-alive
+Sec-Fetch-Mode: navigate
+Host: 127.0.0.1:8040
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.113 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Accept-Language: en-GB,en-US;q=0.9,en;q=0.8
+
+
+'2020-05-15 16:55:28,470 run INFO REQ_path: /
+'2020-05-15 16:55:28,470 run INFO ARGS: ImmutableMultiDict([('text', 'Mustan kissan paksut posket.')])
+'2020-05-15 16:55:28,470 run INFO DATA: b''
+'2020-05-15 16:55:28,471 run INFO FORM: ImmutableMultiDict([])
+'2020-05-15 16:55:28,540 werkzeug INFO 127.0.0.1 - - [15/May/2020 16:55:28] "GET /?text=Mustan%20kissan%20paksut%20posket. HTTP/1.1" 200 -
+'2020-05-15 16:55:34,485 werkzeug INFO  * Running on http://127.0.0.1:8040/ (Press CTRL+C to quit)
+'2020-05-15 16:55:50,333 run INFO HEADERS: Sec-Fetch-Dest: document
+Host: 127.0.0.1:8040
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: none
+Upgrade-Insecure-Requests: 1
+Accept-Encoding: gzip, deflate, br
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.113 Safari/537.36
+Accept-Language: en-GB,en-US;q=0.9,en;q=0.8
+Connection: keep-alive
+Sec-Fetch-User: ?1
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+
+
+'2020-05-15 16:55:50,334 run INFO REQ_path: /
+'2020-05-15 16:55:50,335 run INFO ARGS: ImmutableMultiDict([('text', 'Mustan koiran paksut posket.')])
+'2020-05-15 16:55:50,335 run INFO DATA: b''
+'2020-05-15 16:55:50,336 run INFO FORM: ImmutableMultiDict([])
+'2020-05-15 16:55:50,426 werkzeug INFO 127.0.0.1 - - [15/May/2020 16:55:50] "GET /?text=Mustan%20koiran%20paksut%20posket. HTTP/1.1" 200 -
+'2020-05-15 16:56:42,860 werkzeug INFO  * Running on http://127.0.0.1:8040/ (Press CTRL+C to quit)
+'2020-05-15 16:56:49,157 run INFO HEADERS: Accept-Language: en-GB,en-US;q=0.9,en;q=0.8
+Sec-Fetch-Dest: document
+Host: 127.0.0.1:8040
+Sec-Fetch-Site: none
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Accept-Encoding: gzip, deflate, br
+Upgrade-Insecure-Requests: 1
+Connection: keep-alive
+Sec-Fetch-Mode: navigate
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.113 Safari/537.36
+Sec-Fetch-User: ?1
+
+
+'2020-05-15 16:56:49,159 run INFO REQ_path: /
+'2020-05-15 16:56:49,159 run INFO ARGS: ImmutableMultiDict([('text', 'Mustan koiran paksut posket olivat ruskeat.')])
+'2020-05-15 16:56:49,160 run INFO DATA: b''
+'2020-05-15 16:56:49,160 run INFO FORM: ImmutableMultiDict([])
+'2020-05-15 16:56:49,250 run INFO {1: {1: [{'DEPS': '', 'UPOS': 'NOUN', 'MISC': 0, 'HEAD': 0, 'FORM': 'Mustan', 'XPOS': '', 'DEPREL': ['poss'], 'EDGE': 'Edge', 'ID': 1, 'LEMMA': 'musta', 'FEATS': {'VerbForm': '', 'Person': '', 'PronType': '', 'Mood': '', 'Case': 'Gen', 'Number': 'Sing', 'Derivation': '', 'Voice': '', 'AdpType': '', 'Tense': '', 'Degree': '', 'NumType': '', 'PartForm': ''}}, {'DEPS': '', 'UPOS': 'NOUN', 'MISC': 0, 'HEAD': 0, 'FORM': 'koiran', 'XPOS': '', 'DEPREL': ['poss'], 'EDGE': 'Edge', 'ID': 2, 'LEMMA': 'koira', 'FEATS': {'VerbForm': '', 'Person': '', 'PronType': '', 'Mood': '', 'Case': 'Gen', 'Number': 'Sing', 'Derivation': '', 'Voice': '', 'AdpType': '', 'Tense': '', 'Degree': '', 'NumType': '', 'PartForm': ''}}, {'DEPS': '', 'UPOS': 'ADJ', 'MISC': 0, 'HEAD': 0, 'FORM': 'paksut', 'XPOS': '', 'DEPREL': ['amod'], 'EDGE': 'Edge', 'ID': 3, 'LEMMA': 'paksu', 'FEATS': {'VerbForm': '', 'Person': '', 'PronType': '', 'Mood': '', 'Case': 'Nom', 'Number': 'Plur', 'Derivation': '', 'Voice': '', 'AdpType': '', 'Tense': '', 'Degree': '', 'NumType': '', 'PartForm': ''}}, {'DEPS': '', 'UPOS': 'NOUN', 'MISC': 0, 'HEAD': 0, 'FORM': 'posket', 'XPOS': '', 'DEPREL': ['nsubj-cop'], 'EDGE': 'Edge', 'ID': 4, 'LEMMA': 'poski', 'FEATS': {'VerbForm': '', 'Person': '', 'PronType': '', 'Mood': '', 'Case': 'Nom', 'Number': 'Plur', 'Derivation': '', 'Voice': '', 'AdpType': '', 'Tense': '', 'Degree': '', 'NumType': '', 'PartForm': ''}}, {'DEPS': '', 'UPOS': 'VERB', 'MISC': 0, 'HEAD': 0, 'FORM': 'olivat', 'XPOS': '', 'DEPREL': ['cop'], 'EDGE': 'Edge', 'ID': 5, 'LEMMA': 'olla', 'FEATS': {'VerbForm': '', 'Person': '', 'PronType': '', 'Mood': '', 'Case': 'Nom', 'Number': 'Plur', 'Derivation': '', 'Voice': 'ACT', 'AdpType': '', 'Tense': '', 'Degree': '', 'NumType': '', 'PartForm': ''}}, {'DEPS': '', 'UPOS': 'NOUN', 'MISC': 0, 'HEAD': 0, 'FORM': 'ruskeat', 'XPOS': '', 'DEPREL': ['ROOT'], 'EDGE': 'Edge', 'ID': 6, 'LEMMA': 'ruskea', 'FEATS': {'VerbForm': '', 'Person': '', 'PronType': '', 'Mood': '', 'Case': 'Nom', 'Number': 'Plur', 'Derivation': '', 'Voice': '', 'AdpType': '', 'Tense': '', 'Degree': '', 'NumType': '', 'PartForm': ''}}]}}
+'2020-05-15 16:56:49,253 werkzeug INFO 127.0.0.1 - - [15/May/2020 16:56:49] "GET /?text=Mustan%20koiran%20paksut%20posket%20olivat%20ruskeat. HTTP/1.1" 200 -
+'2020-05-15 16:57:41,869 werkzeug INFO  * Running on http://127.0.0.1:8040/ (Press CTRL+C to quit)
+'2020-05-15 16:57:43,653 run INFO HEADERS: Sec-Fetch-User: ?1
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.113 Safari/537.36
+Upgrade-Insecure-Requests: 1
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Dest: document
+Accept-Encoding: gzip, deflate, br
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Cache-Control: max-age=0
+Sec-Fetch-Site: none
+Accept-Language: en-GB,en-US;q=0.9,en;q=0.8
+Connection: keep-alive
+Host: 127.0.0.1:8040
+
+
+'2020-05-15 16:57:43,653 run INFO REQ_path: /
+'2020-05-15 16:57:43,654 run INFO ARGS: ImmutableMultiDict([('text', 'Mustan koiran paksut posket olivat ruskeat.')])
+'2020-05-15 16:57:43,654 run INFO DATA: b''
+'2020-05-15 16:57:43,654 run INFO FORM: ImmutableMultiDict([])
+'2020-05-15 16:57:43,654 run DEBUG ----------------------PARSE DATA----------------------
+'2020-05-15 16:57:43,654 run DEBUG ---------------------------------------------------
+'2020-05-15 16:57:43,700 run INFO {1: {1: [{'FEATS': {'PronType': '', 'Number': 'Sing', 'Mood': '', 'Case': 'Gen', 'VerbForm': '', 'Person': '', 'Tense': '', 'Derivation': '', 'Degree': '', 'NumType': '', 'PartForm': '', 'Voice': '', 'AdpType': ''}, 'FORM': 'Mustan', 'LEMMA': 'musta', 'MISC': 0, 'ID': 1, 'UPOS': 'NOUN', 'DEPREL': ['poss'], 'XPOS': '', 'HEAD': 0, 'EDGE': 'Edge', 'DEPS': ''}, {'FEATS': {'PronType': '', 'Number': 'Sing', 'Mood': '', 'Case': 'Gen', 'VerbForm': '', 'Person': '', 'Tense': '', 'Derivation': '', 'Degree': '', 'NumType': '', 'PartForm': '', 'Voice': '', 'AdpType': ''}, 'FORM': 'koiran', 'LEMMA': 'koira', 'MISC': 0, 'ID': 2, 'UPOS': 'NOUN', 'DEPREL': ['poss'], 'XPOS': '', 'HEAD': 0, 'EDGE': 'Edge', 'DEPS': ''}, {'FEATS': {'PronType': '', 'Number': 'Plur', 'Mood': '', 'Case': 'Nom', 'VerbForm': '', 'Person': '', 'Tense': '', 'Derivation': '', 'Degree': '', 'NumType': '', 'PartForm': '', 'Voice': '', 'AdpType': ''}, 'FORM': 'paksut', 'LEMMA': 'paksu', 'MISC': 0, 'ID': 3, 'UPOS': 'ADJ', 'DEPREL': ['amod'], 'XPOS': '', 'HEAD': 0, 'EDGE': 'Edge', 'DEPS': ''}, {'FEATS': {'PronType': '', 'Number': 'Plur', 'Mood': '', 'Case': 'Nom', 'VerbForm': '', 'Person': '', 'Tense': '', 'Derivation': '', 'Degree': '', 'NumType': '', 'PartForm': '', 'Voice': '', 'AdpType': ''}, 'FORM': 'posket', 'LEMMA': 'poski', 'MISC': 0, 'ID': 4, 'UPOS': 'NOUN', 'DEPREL': ['nsubj-cop'], 'XPOS': '', 'HEAD': 0, 'EDGE': 'Edge', 'DEPS': ''}, {'FEATS': {'PronType': '', 'Number': 'Plur', 'Mood': '', 'Case': 'Nom', 'VerbForm': '', 'Person': '', 'Tense': '', 'Derivation': '', 'Degree': '', 'NumType': '', 'PartForm': '', 'Voice': 'ACT', 'AdpType': ''}, 'FORM': 'olivat', 'LEMMA': 'olla', 'MISC': 0, 'ID': 5, 'UPOS': 'VERB', 'DEPREL': ['cop'], 'XPOS': '', 'HEAD': 0, 'EDGE': 'Edge', 'DEPS': ''}, {'FEATS': {'PronType': '', 'Number': 'Plur', 'Mood': '', 'Case': 'Nom', 'VerbForm': '', 'Person': '', 'Tense': '', 'Derivation': '', 'Degree': '', 'NumType': '', 'PartForm': '', 'Voice': '', 'AdpType': ''}, 'FORM': 'ruskeat', 'LEMMA': 'ruskea', 'MISC': 0, 'ID': 6, 'UPOS': 'NOUN', 'DEPREL': ['ROOT'], 'XPOS': '', 'HEAD': 0, 'EDGE': 'Edge', 'DEPS': ''}]}}
+'2020-05-15 16:57:43,701 werkzeug INFO 127.0.0.1 - - [15/May/2020 16:57:43] "GET /?text=Mustan%20koiran%20paksut%20posket%20olivat%20ruskeat. HTTP/1.1" 200 -

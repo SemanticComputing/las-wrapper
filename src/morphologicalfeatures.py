@@ -1,3 +1,9 @@
+import logging, logging.config
+
+logging.config.fileConfig(fname='conf/logging.ini', disable_existing_loggers=False)
+logger = logging.getLogger('las')
+
+
 class MorphologicalFeatures:
     def __init__(self):
         self.case = "" #CASE

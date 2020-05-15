@@ -14,13 +14,11 @@ from multiprocessing import Process
 import multiprocessing
 import traceback, sys
 from flask import abort
+import logging, logging.config
 
-logger = logging.getLogger('Las')
-hdlr = logging.FileHandler('las.log')
-formatter = logging.Formatter('%(asctime)s %(name)s %(levelname)s %(message)s')
-hdlr.setFormatter(formatter)
-logger.addHandler(hdlr)
-logger.setLevel(logging.INFO)
+logging.config.fileConfig(fname='conf/logging.ini', disable_existing_loggers=False)
+logger = logging.getLogger('las')
+
 
 class RunLexicalAnalysisService:
     def __init__(self, input_texts, env):
@@ -63,20 +61,18 @@ class RunLexicalAnalysisService:
                     raise MissingSectionHeaderError(err_msg)
 
         except Error as e:
-            print("[ERROR] ConfigParser error:", sys.exc_info()[0])
-            traceback.print_exc()
+            logger.error("[ERROR] ConfigParser error: %s", sys.exc_info()[0])
+            logger.error(traceback.print_exc())
             abort(500)
         except Exception as err:
-            print("[ERROR] Unexpected error:", sys.exc_info()[0])
-            traceback.print_exc()
+            logger.error("[ERROR] Unexpected error: %s", sys.exc_info()[0])
+            logger.error(traceback.print_exc())
             abort(500)
 
     def run(self):
         files = None
 
         items = list(self.input_texts.items())
-        #print('url', self.tool)
-        #print('items before', items)
         if len(items) > 1:
             pool = multiprocessing.Pool(4)
             chunksize = self.chunks
@@ -91,7 +87,7 @@ class RunLexicalAnalysisService:
         if files != None:
             for i, j in files[0].items():
                 if i in self.output_texts:
-                    print('This already in', i, j)
+                    logger.debug('This already in %s, %s', i, j)
                 self.output_texts[i] = j
 
     def execute_las_parallel(self, data):
@@ -104,13 +100,13 @@ class RunLexicalAnalysisService:
 
             if len(input_text.split())> 1:
                 output_file = str(self.folder)+"output/"+str(ind)+".txt"
-                #print("IN=",input_text)
-                #print("OUT=", output_file)
+                logger.debug("IN=%s",input_text)
+                logger.debug("OUT=%s", output_file)
                 my_file = Path(output_file)
 
                 output = self.summon_las(input_text)  # +str(output_file)
                 outputtexts[ind] = output
-                #print(ind, output)
+                logger.debug("%s, %s",ind, output)
         return outputtexts
 
     def execute_las(self, input):
@@ -118,10 +114,10 @@ class RunLexicalAnalysisService:
             input_text = self.input_texts[ind]
             if input_text != None:
                 if len(input_text.split())> 1:
-                    #print("IN=", input_text)
+                    logger.debug("IN=%s", input_text)
                     output = self.summon_las(input_text)
                     self.output_texts[ind] = output
-                    #print("OUT=", output)
+                    logger.debug("OUT=%s", output)
 
     def summon_las(self, input_text):
         output = ""
@@ -137,7 +133,7 @@ class RunLexicalAnalysisService:
                 logging.info(command)
                 output = subprocess.check_output(command, shell=True, executable='/bin/bash').decode("utf-8")
             except subprocess.CalledProcessError as cpe:
-                logging.warning("Error: %s", cpe.output)
+                logger.warning("Error: %s", cpe.output)
         return output
 
     def contruct_command(self, input_text):
@@ -146,30 +142,30 @@ class RunLexicalAnalysisService:
         else:
             return self.tool+str(" <<< '")+str(input_text.replace("'","").replace("\\","")) +str("'")
 
-    def write_output(self, output, file):
-        f = open(file, 'w')
-        f.write(output)
-        f.close()
+    # def write_output(self, output, file):
+    #     f = open(file, 'w')
+    #     f.write(output)
+    #     f.close()
 
-    def find_input_files(self):
-        for file in os.listdir(self.folder):
-            if fnmatch.fnmatch(file, self.file_extension):
-                self.input_texts.append(self.folder + str(file))
+    # def find_input_files(self):
+    #     for file in os.listdir(self.folder):
+    #         if fnmatch.fnmatch(file, self.file_extension):
+    #             self.input_texts.append(self.folder + str(file))
 
-    def get_output_files(self):
-        return self.output_files
+    # def get_output_files(self):
+    #     return self.output_files
 
-    def get_input_files(self):
-        return self.input_texts
+    # def get_input_files(self):
+    #     return self.input_texts
 
-    def get_tool(self):
-        return self.tool
+    # def get_tool(self):
+    #     return self.tool
 
-    def set_tool(self, tool):
-        self.tool = tool
+    # def set_tool(self, tool):
+    #     self.tool = tool
 
-    def set_input_files(self, input):
-        self.input_texts = input
+    # def set_input_files(self, input):
+    #     self.input_texts = input
 
     def parse(self, parallel=True):
         words = list()
@@ -194,9 +190,8 @@ class RunLexicalAnalysisService:
                         self.sentences_data[paragraph_ord][sentence_ord] = words
                         self.sentences_json[paragraph_ord][sentence_ord] = words_json
                         words_json = list()
-                        #print(paragraph_ord, ": sentence", sentence_ord, self.sentences_data[paragraph_ord][sentence_ord])
-            #else:
-            #    return 0
+                        logger.debug("%s: sentence %s, %s", paragraph_ord, sentence_ord, self.sentences_data[paragraph_ord][sentence_ord])
+
         return 1
 
     def parse_las(self, input):
@@ -211,13 +206,13 @@ class RunLexicalAnalysisService:
         open_brackets_counter = 0
         sentences = dict()
         sentences[sentence_id] = list()
-        #print("input:", input)
+        logger.debug("input:%s", input)
         for w in input['analysis']:
             weight = 0
             proper = ""
 
 
-            #print("w", w)
+            logger.debug("w=%s", w)
             analysis = w['analysis']
             orig_form = w['word']
 
@@ -230,9 +225,9 @@ class RunLexicalAnalysisService:
                 elif open_brackets_counter<1 and orig_form in brackets_open:
                     open_brackets_counter += 1
 
-            #print(len(orig_form), orig_form, skip_punct, (orig_form in punct))
+            logger.debug("%s, %s, %s, %s",len(orig_form), orig_form, skip_punct, (orig_form in punct))
             if "\n" in orig_form:
-                print("There's a newline in variable...")
+                logger.info("There's a newline in variable...")
 
             if (orig_form != " " and not("\n" in orig_form)) and not(skip_punct == True and orig_form in punct):
                 id += 1
@@ -332,9 +327,6 @@ class RunLexicalAnalysisService:
 
     def get_json(self):
         return self.sentences_json
-
-    def get_json_string(self):
-        return json.dumps(self.sentences_json, ensure_ascii=False)
-
-
-
+    #
+    # def get_json_string(self):
+    #     return json.dumps(self.sentences_json, ensure_ascii=False)

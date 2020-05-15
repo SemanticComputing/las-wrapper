@@ -12,21 +12,24 @@ import nltk.data
 import xml.dom.minidom
 from datetime import datetime as dt
 import csv, traceback
+import logging, logging.config
+
+logging.config.fileConfig(fname='conf/logging.ini', disable_existing_loggers=False)
+logger = logging.getLogger('run')
 
 app = Flask(__name__)
-
 
 @app.before_request
 def before_request():
     if True:
-        print("HEADERS", request.headers)
-        print("REQ_path", request.path)
-        print("ARGS",request.args)
-        print("DATA",request.data)
-        print("FORM",request.form)
+        logger.info("HEADERS: %s", request.headers)
+        logger.info("REQ_path: %s", request.path)
+        logger.info("ARGS: %s",request.args)
+        logger.info("DATA: %s",request.data)
+        logger.info("FORM: %s",request.form)
 
 def parse_input(request):
-    print('----------------------PARSE DATA----------------------')
+    logger.debug('----------------------PARSE DATA----------------------')
     input = dict()
     env = None
     if request.method == 'GET':
@@ -38,19 +41,19 @@ def parse_input(request):
             input[0] = str(request.data.decode('utf-8'))
 
         else:
-            print("Bad type", request.headers['Content-Type'])
-    print('---------------------------------------------------')
+            logger.warning("Bad type: %s", request.headers['Content-Type'])
+    logger.debug('---------------------------------------------------')
 
     try:
         env = os.environ['LAS_CONFIG_ENV']
     except KeyError as kerr:
-        print("Environment variable LAS_CONFIG_ENV not set:", sys.exc_info()[0])
-        traceback.print_exc()
+        logger.warning("Environment variable LAS_CONFIG_ENV not set: %s", sys.exc_info()[0])
+        logger.error(traceback.print_exc())
         env = None
         abort(500, 'Problem with setup: internal server error')
     except Exception as err:
-        print("Unexpected error:", sys.exc_info()[0])
-        traceback.print_exc()
+        logger.warning("Unexpected error:", sys.exc_info()[0])
+        logger.error(traceback.print_exc())
         env = None
         abort(500, 'Unexpected Internal Server Error')
 
@@ -76,6 +79,8 @@ def index():
         las.run()
         code = las.parse(parallel=False)
         results = las.get_json()
+
+        logger.info(results)
 
         if code == 1:
             data = {'status': 200, 'data': results, 'service':"LAS wrapper", 'date':dt.today().strftime('%Y-%m-%d')}
