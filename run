@@ -6,4 +6,4 @@ fi
 
 sed -i s/^las_url\ =\ .*/las_url\ =\ http:\\/\\/$IP_BACKEND_LAS:$PORT_BACKEND_LAS\\/las\\/analyze/ "$CONF_FILE"
 
-/usr/bin/gunicorn $GUNICORN_RELOAD -w $GUNICORN_WORKER_AMOUNT -t $GUNICORN_TIMEOUT -b 0.0.0.0:5000 run:app
+$GUNICORN_BIN $GUNICORN_RELOAD -w $GUNICORN_WORKER_AMOUNT -t $GUNICORN_TIMEOUT -b 0.0.0.0:5000 run:app

@@ -1,12 +1,9 @@
-FROM alpine:3.8
+FROM python:3.6-slim-buster
 
-ENV GUNICORN_WORKER_AMOUNT 4
-ENV GUNICORN_TIMEOUT 300
-ENV GUNICORN_RELOAD ""
-
-RUN apk add python3 python3-dev gcc libc-dev && rm -rf /var/cache/apk/*
-
-RUN pip3 install flask requests nltk gunicorn
+COPY requirements.txt ./requirements.txt
+RUN pip3 install -r requirements.txt
+RUN pip3 install gunicorn
+ENV GUNICORN_BIN /usr/local/bin/gunicorn
 
 WORKDIR /app
 
@@ -24,6 +21,10 @@ RUN sed -i s/logging\.handlers\.RotatingFileHandler/logging\.StreamHandler/ $LOG
 
 RUN chgrp -R 0 /app \
     && chmod -R g+rwX /app
+
+ENV GUNICORN_WORKER_AMOUNT 4
+ENV GUNICORN_TIMEOUT 300
+ENV GUNICORN_RELOAD ""
 
 EXPOSE 5000
 
