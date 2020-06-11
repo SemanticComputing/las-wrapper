@@ -98,7 +98,7 @@ class RunLexicalAnalysisService:
             ind = tpl[0]
             input_text = tpl[1]
 
-            if len(input_text.split())> 1:
+            if len(input_text.split())> 0:
                 output_file = str(self.folder)+"output/"+str(ind)+".txt"
                 logger.debug("IN=%s",input_text)
                 logger.debug("OUT=%s", output_file)
@@ -113,7 +113,7 @@ class RunLexicalAnalysisService:
         for ind in self.input_texts.keys():
             input_text = self.input_texts[ind]
             if input_text != None:
-                if len(input_text.split())> 1:
+                if len(input_text.split())> 0:
                     logger.debug("IN=%s", input_text)
                     output = self.summon_las(input_text)
                     self.output_texts[ind] = output

@@ -40,7 +40,7 @@ The configurations for LAS can be found in the [conf/config.ini](conf/config.ini
 
 In order to use these configurations, set the environment variable LAS_CONFIG_ENV to 'DEFAULT' or to you personal setting. The value is the section name in the config.ini file where the personal settings can be set for the attributes (configurations) defined above.
 
-### Logging configuration
+#### Logging configuration
 
 The configurations for logging are in the [conf/logging.ini](conf/logging.ini) file. In production, the configurations should be set to WARNING mode in all log files to limit the amount of logging to only errors. The INFO and DEBUG logging modes serve better the debugging in the development environment.
 

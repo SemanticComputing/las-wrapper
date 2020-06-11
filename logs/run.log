@@ -137,3 +137,64 @@ Host: 127.0.0.1:8040
 '2020-05-15 16:57:43,654 run DEBUG ---------------------------------------------------
 '2020-05-15 16:57:43,700 run INFO {1: {1: [{'FEATS': {'PronType': '', 'Number': 'Sing', 'Mood': '', 'Case': 'Gen', 'VerbForm': '', 'Person': '', 'Tense': '', 'Derivation': '', 'Degree': '', 'NumType': '', 'PartForm': '', 'Voice': '', 'AdpType': ''}, 'FORM': 'Mustan', 'LEMMA': 'musta', 'MISC': 0, 'ID': 1, 'UPOS': 'NOUN', 'DEPREL': ['poss'], 'XPOS': '', 'HEAD': 0, 'EDGE': 'Edge', 'DEPS': ''}, {'FEATS': {'PronType': '', 'Number': 'Sing', 'Mood': '', 'Case': 'Gen', 'VerbForm': '', 'Person': '', 'Tense': '', 'Derivation': '', 'Degree': '', 'NumType': '', 'PartForm': '', 'Voice': '', 'AdpType': ''}, 'FORM': 'koiran', 'LEMMA': 'koira', 'MISC': 0, 'ID': 2, 'UPOS': 'NOUN', 'DEPREL': ['poss'], 'XPOS': '', 'HEAD': 0, 'EDGE': 'Edge', 'DEPS': ''}, {'FEATS': {'PronType': '', 'Number': 'Plur', 'Mood': '', 'Case': 'Nom', 'VerbForm': '', 'Person': '', 'Tense': '', 'Derivation': '', 'Degree': '', 'NumType': '', 'PartForm': '', 'Voice': '', 'AdpType': ''}, 'FORM': 'paksut', 'LEMMA': 'paksu', 'MISC': 0, 'ID': 3, 'UPOS': 'ADJ', 'DEPREL': ['amod'], 'XPOS': '', 'HEAD': 0, 'EDGE': 'Edge', 'DEPS': ''}, {'FEATS': {'PronType': '', 'Number': 'Plur', 'Mood': '', 'Case': 'Nom', 'VerbForm': '', 'Person': '', 'Tense': '', 'Derivation': '', 'Degree': '', 'NumType': '', 'PartForm': '', 'Voice': '', 'AdpType': ''}, 'FORM': 'posket', 'LEMMA': 'poski', 'MISC': 0, 'ID': 4, 'UPOS': 'NOUN', 'DEPREL': ['nsubj-cop'], 'XPOS': '', 'HEAD': 0, 'EDGE': 'Edge', 'DEPS': ''}, {'FEATS': {'PronType': '', 'Number': 'Plur', 'Mood': '', 'Case': 'Nom', 'VerbForm': '', 'Person': '', 'Tense': '', 'Derivation': '', 'Degree': '', 'NumType': '', 'PartForm': '', 'Voice': 'ACT', 'AdpType': ''}, 'FORM': 'olivat', 'LEMMA': 'olla', 'MISC': 0, 'ID': 5, 'UPOS': 'VERB', 'DEPREL': ['cop'], 'XPOS': '', 'HEAD': 0, 'EDGE': 'Edge', 'DEPS': ''}, {'FEATS': {'PronType': '', 'Number': 'Plur', 'Mood': '', 'Case': 'Nom', 'VerbForm': '', 'Person': '', 'Tense': '', 'Derivation': '', 'Degree': '', 'NumType': '', 'PartForm': '', 'Voice': '', 'AdpType': ''}, 'FORM': 'ruskeat', 'LEMMA': 'ruskea', 'MISC': 0, 'ID': 6, 'UPOS': 'NOUN', 'DEPREL': ['ROOT'], 'XPOS': '', 'HEAD': 0, 'EDGE': 'Edge', 'DEPS': ''}]}}
 '2020-05-15 16:57:43,701 werkzeug INFO 127.0.0.1 - - [15/May/2020 16:57:43] "GET /?text=Mustan%20koiran%20paksut%20posket%20olivat%20ruskeat. HTTP/1.1" 200 -
+'2020-06-11 08:42:21,982 werkzeug INFO  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+'2020-06-11 08:44:17,840 run INFO HEADERS: Accept-Language: fi,en-GB;q=0.7,en;q=0.3
+Upgrade-Insecure-Requests: 1
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Host: localhost:5000
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:76.0) Gecko/20100101 Firefox/76.0
+Accept-Encoding: gzip, deflate
+
+
+'2020-06-11 08:44:17,840 run INFO REQ_path: /
+'2020-06-11 08:44:17,840 run INFO ARGS: ImmutableMultiDict([('text', 'sauli')])
+'2020-06-11 08:44:17,840 run INFO DATA: b''
+'2020-06-11 08:44:17,840 run INFO FORM: ImmutableMultiDict([])
+'2020-06-11 08:44:17,971 run INFO {1: {1: [{'EDGE': 'Edge', 'ID': 1, 'DEPREL': '', 'MISC': 0, 'XPOS': '', 'FEATS': {'Case': '', 'Degree': '', 'PronType': '', 'Voice': '', 'Person': '', 'Derivation': '', 'PartForm': '', 'Tense': '', 'AdpType': '', 'Number': 'Plur', 'VerbForm': '', 'NumType': '', 'Mood': ''}, 'FORM': 'sauli', 'DEPS': '', 'LEMMA': 'sauli', 'UPOS': '', 'HEAD': 0}]}}
+'2020-06-11 08:44:17,972 werkzeug INFO 127.0.0.1 - - [11/Jun/2020 08:44:17] "GET /?text=sauli HTTP/1.1" 200 -
+'2020-06-11 08:44:27,562 run INFO HEADERS: Accept-Language: fi,en-GB;q=0.7,en;q=0.3
+Upgrade-Insecure-Requests: 1
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Host: localhost:5000
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:76.0) Gecko/20100101 Firefox/76.0
+Accept-Encoding: gzip, deflate
+
+
+'2020-06-11 08:44:27,562 run INFO REQ_path: /
+'2020-06-11 08:44:27,562 run INFO ARGS: ImmutableMultiDict([('text', 'Sauli')])
+'2020-06-11 08:44:27,563 run INFO DATA: b''
+'2020-06-11 08:44:27,563 run INFO FORM: ImmutableMultiDict([])
+'2020-06-11 08:44:27,611 run INFO {1: {1: [{'EDGE': 'Edge', 'ID': 1, 'DEPREL': '', 'MISC': 0, 'XPOS': '', 'FEATS': {'Case': '', 'Degree': '', 'PronType': '', 'Voice': '', 'Person': '', 'Derivation': '', 'PartForm': '', 'Tense': '', 'AdpType': '', 'Number': 'Plur', 'VerbForm': '', 'NumType': '', 'Mood': ''}, 'FORM': 'Sauli', 'DEPS': '', 'LEMMA': 'Sauli', 'UPOS': '', 'HEAD': 0}]}}
+'2020-06-11 08:44:27,611 werkzeug INFO 127.0.0.1 - - [11/Jun/2020 08:44:27] "GET /?text=Sauli HTTP/1.1" 200 -
+'2020-06-11 08:44:34,203 run INFO HEADERS: Accept-Language: fi,en-GB;q=0.7,en;q=0.3
+Upgrade-Insecure-Requests: 1
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Host: localhost:5000
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:76.0) Gecko/20100101 Firefox/76.0
+Accept-Encoding: gzip, deflate
+
+
+'2020-06-11 08:44:34,204 run INFO REQ_path: /
+'2020-06-11 08:44:34,204 run INFO ARGS: ImmutableMultiDict([('text', 'Koira')])
+'2020-06-11 08:44:34,204 run INFO DATA: b''
+'2020-06-11 08:44:34,204 run INFO FORM: ImmutableMultiDict([])
+'2020-06-11 08:44:34,263 run INFO {1: {1: [{'EDGE': 'Edge', 'ID': 1, 'DEPREL': ['ROOT'], 'MISC': 0, 'XPOS': '', 'FEATS': {'Case': 'Nom', 'Degree': '', 'PronType': '', 'Voice': '', 'Person': '', 'Derivation': '', 'PartForm': '', 'Tense': '', 'AdpType': '', 'Number': 'Sing', 'VerbForm': '', 'NumType': '', 'Mood': ''}, 'FORM': 'Koira', 'DEPS': '', 'LEMMA': 'koira', 'UPOS': 'NOUN', 'HEAD': 0}]}}
+'2020-06-11 08:44:34,264 werkzeug INFO 127.0.0.1 - - [11/Jun/2020 08:44:34] "GET /?text=Koira HTTP/1.1" 200 -
+'2020-06-11 08:44:45,374 run INFO HEADERS: Accept-Language: fi,en-GB;q=0.7,en;q=0.3
+Upgrade-Insecure-Requests: 1
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+Host: localhost:5000
+Connection: keep-alive
+User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:76.0) Gecko/20100101 Firefox/76.0
+Accept-Encoding: gzip, deflate
+
+
+'2020-06-11 08:44:45,374 run INFO REQ_path: /
+'2020-06-11 08:44:45,374 run INFO ARGS: ImmutableMultiDict([('text', 'Sauli')])
+'2020-06-11 08:44:45,374 run INFO DATA: b''
+'2020-06-11 08:44:45,374 run INFO FORM: ImmutableMultiDict([])
+'2020-06-11 08:44:45,414 run INFO {1: {1: [{'EDGE': 'Edge', 'ID': 1, 'DEPREL': '', 'MISC': 0, 'XPOS': '', 'FEATS': {'Case': '', 'Degree': '', 'PronType': '', 'Voice': '', 'Person': '', 'Derivation': '', 'PartForm': '', 'Tense': '', 'AdpType': '', 'Number': 'Plur', 'VerbForm': '', 'NumType': '', 'Mood': ''}, 'FORM': 'Sauli', 'DEPS': '', 'LEMMA': 'Sauli', 'UPOS': '', 'HEAD': 0}]}}
+'2020-06-11 08:44:45,415 werkzeug INFO 127.0.0.1 - - [11/Jun/2020 08:44:45] "GET /?text=Sauli HTTP/1.1" 200 -
