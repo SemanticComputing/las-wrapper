@@ -1,8 +1,18 @@
 # Lexical Analysis Service Wrapper
 
-Wrapping up Lexical Analysis Service (LAS).
+## About
 
-Annotates given text and outputs JSON.
+The Lexical Analysis Service (LAS) is a linguistic tool that can be used for morphological analysis of Finnish text.  LAS uses existing linguistic tools such as Omorfi that have support Finnish and many other
+languages. It consists of language recognition (for 95 languages), lemmatization (for 20 languages), morphological analysis (for 14 languages), inflected form generation (for 14 languages), and hyphenation (for 46 languages)9. All functionalities are available as web services, supporting both the HTTP and WebSocket protocols. All services are additionally CORS-enabled and return results in JSON for easy integration into HTML5 web applications. The wrapper unifies and packages the output.
+
+### API
+
+The service has also a usable API for testing. The service API description can be found from [Swagger](https://app.swaggerhub.com/apis-docs/SeCo/nlp.ldf.fi/1.0.0#/Finnish-dep-parser/).
+
+### Publications
+
+* Minna Tamper, Arttu Oksanen, Jouni Tuominen, Aki Hietanen and Eero Hyvönen: Automatic Annotation Service APPI: Named Entity Linking in Legal Domain. The Semantic Web: ESWC 2020 Satellite Events (Harth, Andreas, Presutti, Valentina, Troncy, Raphaël, Acosta, Maribel, Polleres, Axel, Fernández, Javier D., Xavier Parreira, Josiane, Hartig, Olaf, Hose, Katja and Cochez, Michael (eds.)), Lecture Notes in Computer Science, vol. 12124, pp. 208-213, Springer-Verlag, 2020.
+
 
 ## Getting Started
 
