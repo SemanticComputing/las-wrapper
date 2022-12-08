@@ -101,8 +101,8 @@ class RunLexicalAnalysisService:
 
             if len(input_text.split())> 0:
                 output_file = str(self.folder)+"output/"+str(ind)+".txt"
-                logger.debug("IN=%s",input_text)
-                logger.debug("OUT=%s", output_file)
+                logger.info("IN=%s",input_text)
+                logger.info("OUT=%s", output_file)
                 my_file = Path(output_file)
 
                 output = self.summon_las(input_text)  # +str(output_file)
