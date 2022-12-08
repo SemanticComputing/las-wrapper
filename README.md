@@ -7,7 +7,7 @@ languages. It consists of language recognition, lemmatization, morphological ana
 
 ### API
 
-The service has also a usable API for testing. The service API description can be found from [Swagger](https://app.swaggerhub.com/apis-docs/SeCo/nlp.ldf.fi/1.0.0#/Finnish-dep-parser/).
+The service has also a usable API for testing. The service API description can be found from [Swagger](https://app.swaggerhub.com/apis-docs/SeCo/nlp.ldf.fi/1.0.0#/Lexical%20analysis%20service%20(LAS)/).
 
 ### Publications
 
