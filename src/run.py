@@ -83,12 +83,12 @@ def index():
         logger.info(results)
 
         if code == 1:
-            data = {'status': 200, 'data': results, 'service':"LAS wrapper", 'date':dt.today().strftime('%Y-%m-%d')}
+            data = {'status': 200, 'data': results, 'service':"LAS wrapper", 'version':'1.0', 'timestamp':dt.today().strftime('%Y-%m-%d')}
             return jsonify(data)
         else:
-            data = {'status': -1, 'error': results.toprettyxml(), 'service':"LAS wrapper", 'date':dt.today().strftime('%Y-%m-%d')}
+            data = {'status': -1, 'error': results.toprettyxml(), 'service':"LAS wrapper", 'version':'1.0', 'timestamp':dt.today().strftime('%Y-%m-%d')}
             return jsonify(json.dumps(data, ensure_ascii=False))
     
-    data = {'status': -1, 'error': "415 Unsupported Media Type ;)", 'service':"LAS wrapper", 'date':dt.today().strftime('%Y-%m-%d')}
+    data = {'status': -1, 'error': "415 Unsupported Media Type ;)", 'service':"LAS wrapper", 'version':'1.0', 'timestamp':dt.today().strftime('%Y-%m-%d')}
     return jsonify(data)
 
