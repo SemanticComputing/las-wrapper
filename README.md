@@ -2,8 +2,8 @@
 
 ## About
 
-The Lexical Analysis Service (LAS) is a linguistic tool that can be used for morphological analysis of Finnish text.  LAS uses existing linguistic tools such as Omorfi that have support Finnish and many other
-languages. It consists of language recognition (for 95 languages), lemmatization (for 20 languages), morphological analysis (for 14 languages), inflected form generation (for 14 languages), and hyphenation (for 46 languages)9. All functionalities are available as web services, supporting both the HTTP and WebSocket protocols. All services are additionally CORS-enabled and return results in JSON for easy integration into HTML5 web applications. The wrapper unifies and packages the output.
+The [Lexical Analysis Service (LAS)](http://demo.seco.tkk.fi/las/) is a linguistic tool that can be used for morphological analysis of Finnish text.  LAS uses existing linguistic tools such as Omorfi that have support Finnish and many other
+languages. It consists of language recognition, lemmatization, morphological analysis, inflected form generation, and hyphenation. All functionalities are available as web services, supporting both the HTTP and WebSocket protocols. All services are additionally CORS-enabled and return results in JSON for easy integration into HTML5 web applications. The wrapper unifies and packages the output.
 
 ### API
 
