@@ -35,6 +35,7 @@ class RunLexicalAnalysisService:
         self.output_texts = dict()
         self.sentences_json = dict()
         self.sentences_data = dict()
+        self.json_data = dict()
         self.tool = ""
         self.chunks = 4
 
@@ -169,6 +170,7 @@ class RunLexicalAnalysisService:
 
     def parse(self, parallel=True):
         words = list()
+        self.json_data['morphology'] = list()
 
         for paragraph_ord in self.output_texts.keys():
             data = self.output_texts[paragraph_ord]
@@ -189,6 +191,12 @@ class RunLexicalAnalysisService:
                         # save words to a sentence, render to json
                         self.sentences_data[paragraph_ord][sentence_ord] = words
                         self.sentences_json[paragraph_ord][sentence_ord] = words_json
+                        data = {'paragraph':paragraph_ord,
+                                'sentence':sentence_ord,
+                                'text':'',
+                                'words':words_json}
+                        self.json_data['morphology'].append(data)
+
                         words_json = list()
                         logger.debug("%s: sentence %s, %s", paragraph_ord, sentence_ord, self.sentences_data[paragraph_ord][sentence_ord])
 
@@ -325,8 +333,11 @@ class RunLexicalAnalysisService:
                 tag = p[label][0]
         return tag
 
-    def get_json(self):
+    def get_sentence_json(self):
         return self.sentences_json
+
+    def get_json(self):
+        return self.json_data
     #
     # def get_json_string(self):
     #     return json.dumps(self.sentences_json, ensure_ascii=False)
